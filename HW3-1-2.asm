@@ -1,5 +1,7 @@
-#x---->$s0
-#y---->$s1
+#$s0---->x
+#$s1---->y
+
+# while (x>y+5) {x--; x--; y++}
 
 .text
 .globl	main

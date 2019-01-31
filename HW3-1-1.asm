@@ -1,8 +1,8 @@
-#x---->$s0
-#y---->$s1
+#$s0---->x
+#$s1---->y
 
-.data
-		
+# if (x>y+5) then x=x+y else y=x-y;
+
 .text
 .globl	main
 main:

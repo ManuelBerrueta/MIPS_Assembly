@@ -1,5 +1,7 @@
-#x---->$s0
-#y---->$s1
+#$s0---->x
+#$s1---->y
+
+# for (x=1; x<y; x++) {x=x+5; y++}
 
 .text
 .globl	main
