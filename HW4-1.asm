@@ -33,7 +33,7 @@ main:
         lbu     $t0, 0($t1)   # Loads 'a' from memory into $t0
         
         la      $s0, buffer   # Load address of buffer in to register $s0
-        la		$s2, newStr   # Load address of newStr in to register $s2
+        la	$s2, newStr   # Load address of newStr in to register $s2
         
 
         # Test code to verify 'a' loaded
@@ -79,9 +79,9 @@ main:
             #
             Else:
                 # Test code to check string index moving
-                la      $a0, 0($s0)
-                li      $v0, 4
-                syscall
+                #la      $a0, 0($s0)
+                #li      $v0, 4
+                #syscall
 
                 addi    $s0, $s0, 1     # Shifts index of string by 1
                 j		CountaLoop	    # jump to CountaLoop
@@ -113,9 +113,9 @@ main:
                 sb      $t1, 0($s2)        # Store contents of $s0 elementf into s2
                 
                 # Test code to check string index moving backwards
-                la      $a0, 0($s0)
-                li      $v0, 4
-                syscall
+                #la      $a0, 0($s0)
+                #li      $v0, 4
+                #syscall
                 
                 #if newCounter == #s1 counter, remove a from string
                 addi    $s0, $s0, 1    # Shifts index of buffer 1
