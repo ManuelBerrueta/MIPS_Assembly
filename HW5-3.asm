@@ -59,6 +59,10 @@ main:
     
 Quicksort:
 	
+	# $t0 ----> midpivot -1
+	# $t1 ----> midpivot +1
+	# $t2 ----> high 
+
 	# if ( low < high ) / if (low >= high) we jump
 	beq		$a1, $a2, returnqs	# if $a1 == $a2 then target
 	
@@ -72,14 +76,28 @@ Quicksort:
 	jal		Partition				# jump to Partition and save position to $ra
 
 	addi	$sp, $sp, -4			# $sp = $sp -4 // space for returned value from partition
-	sw      $v0, 4($sp)			
+									# Need to clean up this from the stack
 
-	lw      $a0, 0($sp)	
+	sw      $v0, 4($sp)				# save return v0 from Partition to the stack
 	
+	addi	$t0, $v0, -1			# $t0 = midpivot - 1
 	
-	
+	move    $a2, $t0				# move midpivot-1 to 3rd argument for lower half sort
 
+	jal		Quicksort				# jump to Quicksort to sort lower half
+	
+	lw      $t1, 4($sp)				# Recover v0 from Partition (midpivot) from the stack
+	addi	$sp, $sp, 4				# Clean up v0 from stack
 
+	addi	$t1, $t1, 1				# $t1 = midpivot +1
+
+	move 	$a1, $t1				# $a1 = midpivot + 1
+
+	lw      $t2, 8($sp)				# Retrieved High from stack
+
+	move 	$a2, $t2				# $a2 = High
+
+	jal		Quicksort				# jump to Quicksort to sort upper half
 
 
 	lw		$ra, 12($sp)			# Recover saved return address
