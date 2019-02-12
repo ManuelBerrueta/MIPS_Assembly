@@ -62,7 +62,7 @@ Quicksort:
 	# $t2 ----> high 
 
 	# if ( low < high ) / if (low >= high) we jump
-	beq		$a1, $a2, returnqs	# if $a1 == $a2 then target
+	bgt		$a1, $a2, returnqs	# if $a1 == $a2 then target
 	
 	# Save incoming arguments on the stack
 	addi	$sp, $sp, -16			# $sp = $sp + -12 // Make space on stack
@@ -76,7 +76,7 @@ Quicksort:
 	addi	$sp, $sp, -4			# $sp = $sp -4 // space for returned value from partition
 									# Need to clean up this from the stack
 
-	sw      $v0, 4($sp)				# save return v0 from Partition to the stack
+	sw      $v0, 0($sp)				# save return v0 from Partition to the stack
 	
 	
 	addi	$t0, $v0, -1			# $t0 = midpivot - 1
@@ -113,7 +113,7 @@ Partition:
 	# $t1 ----> PIVOT, value at list[high]
 	# $t2 ----> i -1
 	# $t3 ----> j
-	# $t4 ----> high
+	# $t4 ----> high -1
 	# $s0 ----> arrayAdress
 	# $t5 ----> address of list[j]
 	# $t6 ----> value at list[j]
