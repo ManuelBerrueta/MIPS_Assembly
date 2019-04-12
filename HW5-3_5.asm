@@ -1,7 +1,7 @@
 # Quicksort
 
 .data
-	# myArray is an array of 6 integers
+	# myArray is an array of 7 integers
 	# The size of the space is given by n * 4
 	# Where n is size of array and 4 is the number of bytes per index
 	#myArray: .space 28 		# 7 intgers * 4 bytes
@@ -78,7 +78,6 @@ Partition:
 			j	partitionLowerLoop
 		
 	endPartition:
-	#LOOOK AT QUICKSORT C for 
 	sll     $t6, $t4, 2				# j * 4 bytes
 	add		$t6, $a0, $t6			# address of myArray[j]
 	sll     $t5, $a1, 2				# i * 4 bytes
@@ -91,8 +90,10 @@ Partition:
 
 	move    $v0, $t4
 
+	lw		$a2, 12($sp)				# Recover saved high value
+	lw		$a1, 8($sp)				# Recover low value
+	lw		$a0, 4($sp)				# Recover array address
 	lw		$ra, 0($sp)			# Recover saved return address
-
 	addi    $sp, $sp, 16		# stack clean up
 	jr		$ra					# jump to $ra
 	
@@ -134,13 +135,15 @@ Quicksort:
 	
 	jal		Quicksort				# jump to Quicksort to sort upper half
 
+	
+	
+	lw		$a2, 12($sp)				# Recover saved high value
+	lw		$a1, 8($sp)				# Recover low value
+	lw		$a0, 4($sp)				# Recover array address
 	lw		$ra, 0($sp)			# Recover saved return address
 
-	addi    $sp, $sp, 16
-#	lw		$a2, 8($sp)				# Recover saved high value
-#	lw		$a1, 12($sp)				# Recover low value
-#	lw		$a0, 16($sp)				# Recover array address
-#	addi	$sp, $sp, 20			# $sp = sp1 + 12 // Clean up stack
+	#addi    $sp, $sp, 16
+	addi	$sp, $sp, 16			# // Clean up stack
 	
 	returnqs:
 		jr      $ra
