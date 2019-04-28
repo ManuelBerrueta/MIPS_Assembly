@@ -1,11 +1,24 @@
 .data
-	helloWorld: .asciiz "Hello World \n" #Sets up a string
-		
+	helloWorld: .asciiz "Hello World! \n" #This is a comment
+	newLine: .asciiz "\n"
+	oneChar: .byte 'T' 
+	age: .word 2 #
+	PI: .float 3.14159265359
+	
 .text
-.globl	main
-main:
 	#
-	li $v0, 4	                     # 4 to print out strings & char
+	li $v0, 4	# 4 to print out strings & char
 	la $a0, helloWorld
 	syscall
-	#addi $t0, $t0, 1
+	li $v0, 4
+	la $a0, oneChar
+	syscall
+	li $v0, 1	# 1 to print out integers
+	lw $a0, age
+	syscall
+	li $v0, 4
+	la $a0, newLine
+	syscall
+	li $v0, 2
+	lwc1 $f12, PI
+	syscall

@@ -1,24 +1,16 @@
+# MIPS Hello World!
+
 .data
-	helloWorld: .asciiz "Hello World \n" #This is a comment
-	newLine: .asciiz "\n"
-	oneChar: .byte 'T' 
-	age: .word 2 #
-	PI: .float 3.14159265359
-	
+	str_helloWorld: .asciiz "Hello World! \n" #Sets up a string
+		
 .text
+.globl	main
+main:
 	#
-	li $v0, 4	# 4 to print out strings & char
-	la $a0, helloWorld
+	li		$v0, 4					# 4 to print out strings & char
+	la		$a0, str_helloWorld
 	syscall
-	li $v0, 4
-	la $a0, oneChar
-	syscall
-	li $v0, 1	# 1 to print out integers
-	lw $a0, age
-	syscall
-	li $v0, 4
-	la $a0, newLine
-	syscall
-	li $v0, 2
-	lwc1 $f12, PI
-	syscall
+	
+	exit:
+		li		$v0, 10				# 10 is used to terminate the program
+		syscall
